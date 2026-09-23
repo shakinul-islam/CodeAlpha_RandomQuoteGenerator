@@ -163,7 +163,7 @@ class QuoteScreen extends ConsumerWidget {
                                     children: [
                                       const Spacer(),
 
-                                      // Quote Text
+                                      // Quote Text (Animates only when text changes)
                                       Text(
                                             '"${quote.text}"',
                                             key: ValueKey(quote.text),
@@ -298,6 +298,9 @@ class QuoteScreen extends ConsumerWidget {
 
   Widget _buildPremiumButton(WidgetRef ref, Color color) {
     return OutlinedButton(
+      key: const ValueKey(
+        'PremiumButton',
+      ), // বাটনটি স্ক্রিনে স্থির রাখার জন্য Key
       onPressed: () {
         HapticFeedback.mediumImpact();
         ref.read(quoteNotifierProvider.notifier).getNewQuote();
@@ -317,7 +320,7 @@ class QuoteScreen extends ConsumerWidget {
           letterSpacing: 1.5,
         ),
       ),
-    ).animate().fadeIn(delay: 800.ms, duration: 800.ms);
+    );
   }
 
   Widget _buildErrorState(String error, WidgetRef ref) {
